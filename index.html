@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f6f1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="Compare two HAR captures in your browser. Find new errors, heavier responses, extra requests, and timing changes. Local files stay on your device.">
+  <title>HarborDiff — What changed on the wire?</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to comparison</a>
+  <header class="site-header shell">
+    <a class="brand" href="./" aria-label="HarborDiff home"><img src="./assets/logo.svg" alt="" width="32" height="32"><span>HarborDiff<span class="brand-dot">.</span></span></a>
+    <span class="header-label">Local HAR comparison</span>
+    <a class="github-link" href="https://github.com/Wildchiken/harbor-diff" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> YOUR CAPTURES. YOUR BROWSER.</div>
+        <h1 id="hero-title">What changed<br>on the <span>wire?</span></h1>
+        <p class="hero-description">Two network captures. One clear comparison.<br>Find the new errors, heavier responses, and extra requests.</p>
+      </div>
+      <div class="hero-aside" aria-hidden="true">
+        <div class="wire-caption"><span>BEFORE</span><span>AFTER</span></div>
+        <div class="wire-line"><i style="--length:48%"></i><span>200</span><b>→</b><i class="alert" style="--length:74%"></i><span class="alert-text">500</span></div>
+        <div class="wire-line"><i style="--length:65%"></i><span>42 kb</span><b>→</b><i class="alert" style="--length:94%"></i><span class="alert-text">218 kb</span></div>
+        <div class="wire-line"><i style="--length:35%"></i><span>180 ms</span><b>→</b><i style="--length:35%"></i><span>176 ms</span></div>
+        <div class="wire-footer">LESS GUESSWORK <span>MORE SIGNAL ↗</span></div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="compare-title">
+      <div class="section-heading"><h2 id="compare-title"><span class="step">01</span> Add your captures</h2><button class="text-button" id="demo-button" type="button">Try the demo <span aria-hidden="true">↗</span></button></div>
+      <div class="capture-grid">
+        <article class="capture" id="before-dropzone">
+          <div class="capture-top"><span class="capture-number">A</span><h3>Before</h3><span class="capture-tag">BASELINE</span></div>
+          <label class="file-target" for="before-file"><span class="upload-icon" aria-hidden="true">↑</span><strong id="before-label">Drop a .har file here</strong><span id="before-detail">or click to choose a file · up to 25 MiB</span><input class="file-input" id="before-file" type="file" accept=".har,.json,application/json" aria-label="Choose before HAR file"></label>
+          <div class="capture-bottom"><span class="file-status" id="before-status">No capture selected</span><button class="text-button muted" data-paste="before" type="button">Paste JSON</button></div>
+        </article>
+        <article class="capture" id="after-dropzone">
+          <div class="capture-top"><span class="capture-number after">B</span><h3>After</h3><span class="capture-tag">COMPARISON</span></div>
+          <label class="file-target" for="after-file"><span class="upload-icon" aria-hidden="true">↑</span><strong id="after-label">Drop a .har file here</strong><span id="after-detail">or click to choose a file · up to 25 MiB</span><input class="file-input" id="after-file" type="file" accept=".har,.json,application/json" aria-label="Choose after HAR file"></label>
+          <div class="capture-bottom"><span class="file-status" id="after-status">No capture selected</span><button class="text-button muted" data-paste="after" type="button">Paste JSON</button></div>
+        </article>
+      </div>
+      <div class="workspace-actions"><p class="privacy-line"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true"><rect x="4" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 8V5a3.5 3.5 0 0 1 7 0v3" stroke="currentColor" stroke-width="1.5"/></svg> Files stay in this browser. No uploads or accounts.</p><div class="action-buttons"><button class="text-button muted" id="clear-button" type="button" hidden>Clear</button><button class="primary-button" id="compare-button" type="button" disabled>Compare captures <span aria-hidden="true">→</span></button></div></div>
+      <details class="comparison-options"><summary>Matching &amp; thresholds <span>Optional</span></summary><div class="options-grid"><label>Ignore query parameters<input id="ignore-params" type="text" placeholder="e.g. timestamp, cacheBust" spellcheck="false"><small>Comma-separated, exact parameter names. Values stay part of matching unless ignored.</small></label><label>Minimum body increase (bytes)<input id="min-bytes" type="number" min="0" step="1" value="0"><small>Only flag increases above this threshold.</small></label><label>Minimum median increase (ms)<input id="min-duration" type="number" min="0" step="1" value="100"><small>Compare observed request durations.</small></label></div></details>
+      <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+    </section>
+
+    <section class="results" id="results" aria-labelledby="results-title" hidden>
+      <div class="section-heading results-heading"><h2 id="results-title"><span class="step">02</span> The difference</h2><span class="demo-label" id="demo-label" hidden>SYNTHETIC DEMO</span></div>
+      <p class="result-lead" id="result-lead"></p>
+      <div class="metric-grid" id="metrics"></div>
+      <div class="findings-heading"><h3>Changes worth a look</h3><span id="finding-count"></span></div>
+      <div class="finding-grid" id="findings"></div>
+      <div class="table-panel"><div class="table-toolbar"><div class="filter-group" id="filters" aria-label="Filter changes"><button type="button" class="filter active" data-filter="all" aria-pressed="true">Flagged</button><button type="button" class="filter" data-filter="errors" aria-pressed="false">Errors</button><button type="button" class="filter" data-filter="bytes" aria-pressed="false">Heavier</button><button type="button" class="filter" data-filter="duration" aria-pressed="false">Slower</button><button type="button" class="filter" data-filter="count" aria-pressed="false">More calls</button><button type="button" class="filter" data-filter="added" aria-pressed="false">Added</button><button type="button" class="filter" data-filter="removed" aria-pressed="false">Removed</button><button type="button" class="filter" data-filter="unchanged" aria-pressed="false">Unflagged</button></div><label class="search-label"><span class="sr-only">Search request paths</span><input type="search" id="path-search" placeholder="Search paths…" autocomplete="off"></label></div><div class="table-scroll" tabindex="0" role="region" aria-label="Request comparison, horizontally scrollable"><table><thead><tr><th scope="col">Request group</th><th scope="col">Changes</th><th scope="col">Calls <span>A → B</span></th><th scope="col">Body bytes <span>change</span></th><th scope="col">Median <span>change</span></th><th scope="col">Errors <span>A → B</span></th></tr></thead><tbody id="request-rows"></tbody></table></div><div class="table-footer"><span id="table-count"></span><span>Click a request for capture details</span></div></div>
+      <div class="export-panel"><div><h3>Take the findings with you.</h3><p>Copy a report into your issue, PR, or debugging notes.</p><label class="checkbox-label"><input type="checkbox" id="include-urls"> Include URL paths in exports</label><p class="export-note" id="export-note">Exports use request IDs by default. Headers, cookies, and bodies are excluded.</p></div><div class="export-buttons"><button type="button" class="primary-button small" id="copy-button">Copy summary <span aria-hidden="true">↗</span></button><button type="button" class="secondary-button" id="markdown-button">Markdown <span aria-hidden="true">↓</span></button><button type="button" class="secondary-button" id="json-button">JSON <span aria-hidden="true">↓</span></button></div></div>
+      <p id="export-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+      <details class="methodology"><summary>How to read this comparison</summary><div class="methodology-copy"><p>Requests are grouped by method and normalized URL. Repeated requests are compared as a group, using counts, body-byte totals, HTTP error counts, and median duration. Query parameters are included in matching unless you explicitly ignore them above. Their values are hidden in displayed URLs.</p><p>Missing or negative HAR measurements are unknown, not zero. Coverage is shown alongside the metrics. Response body bytes are not total network transfer or page weight.</p><p>Two captures show observations, not proof of a performance regression or its cause. Cache state, network conditions, device load, and user actions can change the result. Capture the same flow under similar conditions and repeat before drawing conclusions.</p><ul id="engine-notes"></ul></div></details>
+    </section>
+
+    <section class="how-it-works" aria-label="How to get started"><div><span class="how-number">01 / CAPTURE</span><h3>Record the same flow.</h3><p>Open your browser’s Network panel, record a session, and export it as HAR. Repeat after your change.</p></div><div><span class="how-number">02 / COMPARE</span><h3>See the changes together.</h3><p>Drop both captures here. Review added requests, HTTP errors, body sizes, and observed durations.</p></div><div><span class="how-number">03 / SHARE</span><h3>Bring evidence to the issue.</h3><p>Export a compact report with request IDs. Choose whether to include URL paths when sharing.</p></div></section>
+  </main>
+  <footer class="site-footer shell"><span>HarborDiff <span class="footer-separator">/</span> A little clarity for the network tab.</span><a href="https://github.com/Wildchiken/harbor-diff" target="_blank" rel="noopener noreferrer">Open source on GitHub ↗</a></footer>
+
+  <dialog id="paste-dialog" aria-labelledby="paste-title"><form id="paste-form"><div class="dialog-heading"><h2 id="paste-title">Paste HAR JSON</h2><button type="button" class="close-button" id="close-paste" aria-label="Close paste dialog">×</button></div><p class="dialog-description">Paste one complete HAR capture. It stays in this browser.</p><label for="paste-content" class="sr-only">HAR JSON</label><textarea id="paste-content" placeholder='{"log":{"entries":[…]}}' spellcheck="false" required></textarea><p id="paste-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><span>Maximum 25 MiB</span><button class="primary-button small" type="submit">Use capture →</button></div></form></dialog>
+  <dialog id="request-dialog" aria-labelledby="request-title"><div class="dialog-heading"><h2 id="request-title">Request details</h2><button type="button" class="close-button" id="close-request" aria-label="Close request details">×</button></div><p class="detail-url" id="request-url"></p><div id="request-detail"></div><p class="dialog-description">These are grouped observations. Query values, headers, cookies, and response bodies are not shown.</p></dialog>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

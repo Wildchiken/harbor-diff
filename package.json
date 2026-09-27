@@ -1,0 +1,20 @@
+{
+  "name": "harbor-diff",
+  "version": "0.1.0",
+  "description": "Turn two HAR captures into a clear, local network-change report.",
+  "type": "module",
+  "bin": { "harbor-diff": "bin/harbor-diff.js" },
+  "exports": "./src/har-core.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "node scripts/serve.mjs",
+    "demo": "node bin/harbor-diff.js --demo"
+  },
+  "files": ["bin", "src/har-core.js", "src/demo.js", "README.md", "LICENSE"],
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/Wildchiken/harbor-diff.git" },
+  "bugs": { "url": "https://github.com/Wildchiken/harbor-diff/issues" },
+  "homepage": "https://Wildchiken.github.io/harbor-diff/",
+  "keywords": ["har", "har-diff", "web-performance", "network", "developer-tools", "offline"]
+}
