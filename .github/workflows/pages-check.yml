@@ -32,7 +32,7 @@ jobs:
           set -euo pipefail
           published_dir="$(mktemp -d)"
           failed=0
-          assets=(index.html styles.css src/app.js src/har-core.js src/demo.js assets/logo.svg)
+          assets=(index.html styles.css src/app.js src/har-core.js src/demo.js assets/logo.svg assets/overview.svg compare-har-files.html guide.css sitemap.xml examples/before.har examples/after.har examples/report.md examples/report.json)
 
           echo "Checking public assets against commit $(git rev-parse HEAD)."
           printf '## Published Pages assets\n\n' >> "$GITHUB_STEP_SUMMARY"
