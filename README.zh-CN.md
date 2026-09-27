@@ -4,6 +4,8 @@
 
 [打开网页工具](https://Wildchiken.github.io/harbor-diff/) · [English](README.md)
 
+![合成案例：新增 HTTP 错误、图片变大、API 重复调用](assets/overview.svg)
+
 把改版前后的两份 HAR 网络记录放进来，查看新增请求、HTTP 错误、响应体大小、重复调用和耗时变化，再复制一份适合贴进 issue 的 Markdown 摘要。
 
 文件在浏览器本地处理，无需账号或 API key。默认导出的报告用 R001 等编号代替网址，不含原始文件名、请求头、Cookie 或响应正文。你可以主动选择加入 URL 路径，但路径本身可能包含私人信息，分享前请检查。

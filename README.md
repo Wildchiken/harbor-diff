@@ -4,6 +4,8 @@
 
 [Open the app](https://Wildchiken.github.io/harbor-diff/) · [Try the CLI](#command-line) · [How matching works](#how-matching-works) · [中文](README.zh-CN.md)
 
+![Synthetic comparison: a new HTTP error, larger image, and repeated API calls](assets/overview.svg)
+
 Drop in a capture from before your change and one from after it. HarborDiff puts new requests, HTTP errors, larger responses, repeated calls, and slower request groups in one view. Copy a Markdown summary or download JSON.
 
 - **Local files stay local.** The app parses captures in your browser. No upload service, account, tracking, remote font, or API key.
@@ -14,7 +16,7 @@ Drop in a capture from before your change and one from after it. HarborDiff puts
 
 ## Quick start
 
-Open the [web app](https://Wildchiken.github.io/harbor-diff/) and select **Try the demo**. The included capture pair is synthetic: a storefront adds a large image, repeats an API request, and starts returning an HTTP error. No real browsing data is included.
+Open the [web app](https://Wildchiken.github.io/harbor-diff/) and select **Try the demo**. The included capture pair is synthetic: a storefront serves a larger image, repeats an API request, and starts returning an HTTP error. No real browsing data is included.
 
 To compare your own captures:
 
