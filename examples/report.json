@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 1,
+  "privacy": "aliases-only",
+  "before": {
+    "requestCount": 9,
+    "groupCount": 9,
+    "count": 9,
+    "totalBodyBytes": 176460,
+    "knownBodyBytes": 9,
+    "totalContentBytes": 176460,
+    "knownContentBytes": 9,
+    "medianDurationMs": 175,
+    "knownDuration": 9,
+    "errorCount": 0,
+    "knownStatus": 9,
+    "statuses": [
+      {
+        "status": 200,
+        "count": 9
+      }
+    ],
+    "coverage": {
+      "entries": 9,
+      "knownStatus": 9,
+      "knownDuration": 9,
+      "knownBodyBytes": 9,
+      "knownContentBytes": 9
+    }
+  },
+  "after": {
+    "requestCount": 12,
+    "groupCount": 9,
+    "count": 12,
+    "totalBodyBytes": 1382100,
+    "knownBodyBytes": 11,
+    "totalContentBytes": 1382100,
+    "knownContentBytes": 11,
+    "medianDurationMs": 190,
+    "knownDuration": 11,
+    "errorCount": 1,
+    "knownStatus": 12,
+    "statuses": [
+      {
+        "status": 200,
+        "count": 11
+      },
+      {
+        "status": 500,
+        "count": 1
+      }
+    ],
+    "coverage": {
+      "entries": 12,
+      "knownStatus": 12,
+      "knownDuration": 11,
+      "knownBodyBytes": 11,
+      "knownContentBytes": 11
+    }
+  },
+  "summary": {
+    "added": 1,
+    "removed": 1,
+    "errors": 1,
+    "bytes": 6,
+    "duration": 3,
+    "count": 2,
+    "flagged": 8,
+    "changed": 8,
+    "totalGroups": 10,
+    "filteredGroups": 10
+  },
+  "coverage": {
+    "before": {
+      "entries": 9,
+      "knownStatus": 9,
+      "knownDuration": 9,
+      "knownBodyBytes": 9,
+      "knownContentBytes": 9
+    },
+    "after": {
+      "entries": 12,
+      "knownStatus": 12,
+      "knownDuration": 11,
+      "knownBodyBytes": 11,
+      "knownContentBytes": 11
+    }
+  },
+  "requests": [
+    {
+      "id": "R002",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 760,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 760,
+        "knownContentBytes": 1,
+        "medianDurationMs": 140,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 1,
+        "totalBodyBytes": 280,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 280,
+        "knownContentBytes": 1,
+        "medianDurationMs": 820,
+        "knownDuration": 1,
+        "errorCount": 1,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 500,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 0,
+        "bodyBytes": -480,
+        "contentBytes": -480,
+        "durationMs": 680,
+        "errorCount": 1
+      },
+      "changes": [
+        "errors",
+        "duration"
+      ],
+      "impactScore": 1000680
+    },
+    {
+      "id": "R010",
+      "method": "POST",
+      "before": null,
+      "after": {
+        "count": 1,
+        "totalBodyBytes": 420,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 420,
+        "knownContentBytes": 1,
+        "medianDurationMs": 215,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 1,
+        "bodyBytes": 420,
+        "contentBytes": 420,
+        "durationMs": null,
+        "errorCount": 0
+      },
+      "changes": [
+        "added",
+        "bytes",
+        "count"
+      ],
+      "impactScore": 10010.41015625
+    },
+    {
+      "id": "R009",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 18000,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 18000,
+        "knownContentBytes": 1,
+        "medianDurationMs": 150,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": null,
+      "delta": {
+        "count": -1,
+        "bodyBytes": -18000,
+        "contentBytes": -18000,
+        "durationMs": null,
+        "errorCount": 0
+      },
+      "changes": [
+        "removed"
+      ],
+      "impactScore": 10000
+    },
+    {
+      "id": "R008",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 44000,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 44000,
+        "knownContentBytes": 1,
+        "medianDurationMs": 240,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 1,
+        "totalBodyBytes": 1244000,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 1244000,
+        "knownContentBytes": 1,
+        "medianDurationMs": 790,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 0,
+        "bodyBytes": 1200000,
+        "contentBytes": 1200000,
+        "durationMs": 550,
+        "errorCount": 0
+      },
+      "changes": [
+        "bytes",
+        "duration"
+      ],
+      "impactScore": 1721.875
+    },
+    {
+      "id": "R005",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 2600,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 2600,
+        "knownContentBytes": 1,
+        "medianDurationMs": 180,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 1,
+        "totalBodyBytes": 2700,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 2700,
+        "knownContentBytes": 1,
+        "medianDurationMs": 1260,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 0,
+        "bodyBytes": 100,
+        "contentBytes": 100,
+        "durationMs": 1080,
+        "errorCount": 0
+      },
+      "changes": [
+        "bytes",
+        "duration"
+      ],
+      "impactScore": 1080.09765625
+    },
+    {
+      "id": "R003",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 8500,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 8500,
+        "knownContentBytes": 1,
+        "medianDurationMs": 175,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 4,
+        "totalBodyBytes": 34000,
+        "knownBodyBytes": 4,
+        "totalContentBytes": 34000,
+        "knownContentBytes": 4,
+        "medianDurationMs": 181.5,
+        "knownDuration": 4,
+        "errorCount": 0,
+        "knownStatus": 4,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 4
+          }
+        ]
+      },
+      "delta": {
+        "count": 3,
+        "bodyBytes": 25500,
+        "contentBytes": 25500,
+        "durationMs": 6.5,
+        "errorCount": 0
+      },
+      "changes": [
+        "bytes",
+        "count"
+      ],
+      "impactScore": 54.90234375
+    },
+    {
+      "id": "R007",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 82000,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 82000,
+        "knownContentBytes": 1,
+        "medianDurationMs": 230,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 1,
+        "totalBodyBytes": 84000,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 84000,
+        "knownContentBytes": 1,
+        "medianDurationMs": 238,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 0,
+        "bodyBytes": 2000,
+        "contentBytes": 2000,
+        "durationMs": 8,
+        "errorCount": 0
+      },
+      "changes": [
+        "bytes"
+      ],
+      "impactScore": 1.953125
+    },
+    {
+      "id": "R001",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 9400,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 9400,
+        "knownContentBytes": 1,
+        "medianDurationMs": 184,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 1,
+        "totalBodyBytes": 9600,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 9600,
+        "knownContentBytes": 1,
+        "medianDurationMs": 179,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 0,
+        "bodyBytes": 200,
+        "contentBytes": 200,
+        "durationMs": -5,
+        "errorCount": 0
+      },
+      "changes": [
+        "bytes"
+      ],
+      "impactScore": 0.1953125
+    },
+    {
+      "id": "R004",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 4000,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 4000,
+        "knownContentBytes": 1,
+        "medianDurationMs": 120,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 1,
+        "totalBodyBytes": null,
+        "knownBodyBytes": 0,
+        "totalContentBytes": null,
+        "knownContentBytes": 0,
+        "medianDurationMs": null,
+        "knownDuration": 0,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 0,
+        "bodyBytes": null,
+        "contentBytes": null,
+        "durationMs": null,
+        "errorCount": 0
+      },
+      "changes": [],
+      "impactScore": 0
+    },
+    {
+      "id": "R006",
+      "method": "GET",
+      "before": {
+        "count": 1,
+        "totalBodyBytes": 7200,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 7200,
+        "knownContentBytes": 1,
+        "medianDurationMs": 88,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "after": {
+        "count": 1,
+        "totalBodyBytes": 7100,
+        "knownBodyBytes": 1,
+        "totalContentBytes": 7100,
+        "knownContentBytes": 1,
+        "medianDurationMs": 83,
+        "knownDuration": 1,
+        "errorCount": 0,
+        "knownStatus": 1,
+        "statuses": [
+          {
+            "status": 200,
+            "count": 1
+          }
+        ]
+      },
+      "delta": {
+        "count": 0,
+        "bodyBytes": -100,
+        "contentBytes": -100,
+        "durationMs": -5,
+        "errorCount": 0
+      },
+      "changes": [],
+      "impactScore": 0
+    }
+  ],
+  "matching": {
+    "ignoredQueryParameterCount": 0
+  },
+  "notes": [
+    "These are observations from two captures. Cache state, network conditions, devices, and user actions can differ; the comparison does not establish a cause.",
+    "Unknown or negative values remain unknown. Totals sum known values only. Byte and duration changes are withheld when either group has incomplete coverage; medians use known durations only.",
+    "Requests are grouped by case-sensitive HTTP method and URL, including query values unless explicitly ignored. Credentials and fragments do not determine grouping. Query keys are sorted, preserving the order of repeated values. Repeated requests, including POST requests with different payloads, are aggregated; payloads are not inspected or retained.",
+    "An errors flag means HTTP errors on an added request group, more observed errors, or an error status not observed before. For matched groups, error flags and error-count deltas are withheld if either capture has unknown statuses; observed error counts remain visible.",
+    "Flagged groups have one or more selected kinds of increase, newly observed errors, additions, or removals. Improvements and other differences can exist without a flag. The legacy summary.changed field is an alias for summary.flagged.",
+    "This report uses request aliases. It excludes URLs, hosts, paths, query parameters, headers, cookies, bodies, and input filenames."
+  ]
+}
