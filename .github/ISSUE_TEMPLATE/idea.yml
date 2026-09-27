@@ -1,0 +1,15 @@
+name: Workflow request
+description: Describe a network comparison task HarborDiff could make easier.
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: What are you trying to compare?
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: Where does the current workflow get in your way?
+    validations:
+      required: true

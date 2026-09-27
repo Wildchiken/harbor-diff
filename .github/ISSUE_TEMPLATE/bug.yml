@@ -1,0 +1,25 @@
+name: Bug report
+description: Report incorrect comparisons or a problem using HarborDiff.
+body:
+  - type: markdown
+    attributes:
+      value: Please use synthetic or carefully sanitized examples. HAR files can contain cookies, credentials, response bodies, and personal information. A report exported without URLs is a good starting point.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Browser or CLI version, options, and a minimal synthetic capture if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Optional report or screenshot
+      description: Review it for private information before posting.
