@@ -6,13 +6,13 @@ import { resolve, extname, sep } from 'node:path';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const port = Number(process.env.HARBORDIFF_PORT || 4173);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('HARBORDIFF_PORT must be 1–65535.');
-const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.har': 'application/json', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.har': 'application/json', '.png': 'image/png', '.webmanifest': 'application/manifest+json', '.md': 'text/markdown', '.json': 'application/json', '.xml': 'application/xml' };
 createServer(async (req, res) => {
   try {
     if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); return res.end(); }
     const path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     const relative = path === '/' ? 'index.html' : path.replace(/^\/+/, '');
-    if (relative.split('/').some(part => part.startsWith('.')) || !/^(index\.html|styles\.css|src\/[^/]+\.js|assets\/[^/]+\.(svg|png)|examples\/[^/]+\.har)$/.test(relative)) {
+    if (relative.split('/').some(part => part.startsWith('.')) || !/^(index\.html|compare-har-files\.html|styles\.css|guide\.css|sitemap\.xml|src\/[^/]+\.js|assets\/[^/]+\.(svg|png)|examples\/[^/]+\.(har|md|json))$/.test(relative)) {
       res.writeHead(404); return res.end('Not found');
     }
     const target = resolve(root, relative);
