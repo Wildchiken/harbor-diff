@@ -82,7 +82,7 @@ npm start
 
 Open `http://127.0.0.1:4173`. No install or build step is required. To use another port, set `HARBORDIFF_PORT`. The local server binds only to loopback and serves the app's public files.
 
-The app is also a plain static site: serve `index.html`, `styles.css`, `src/`, and `assets/` on your preferred static host. No backend is needed.
+The app is also a plain static site: serve `index.html`, `styles.css`, `src/`, and `assets/` on your preferred static host. Include `compare-har-files.html`, `guide.css`, and `examples/` to keep the guide and downloads available. No backend is needed. The included sitemap uses this project's public URL; update its URLs if you deploy elsewhere.
 
 ## Development
 
