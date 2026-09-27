@@ -2,7 +2,7 @@
 
 **What changed on the wire?** Compare two HAR captures and turn network changes into an issue-ready report.
 
-[Open the app](https://Wildchiken.github.io/harbor-diff/) · [Try the CLI](#command-line) · [How matching works](#how-matching-works) · [中文](README.zh-CN.md)
+[Open the demo](https://wildchiken.github.io/harbor-diff/#demo) · [Worked example](https://wildchiken.github.io/harbor-diff/compare-har-files.html) · [Try the CLI](#command-line) · [How matching works](#how-matching-works) · [中文](README.zh-CN.md)
 
 ![Synthetic comparison: a new HTTP error, larger image, and repeated API calls](assets/overview.svg)
 
@@ -16,7 +16,9 @@ Drop in a capture from before your change and one from after it. HarborDiff puts
 
 ## Quick start
 
-Open the [web app](https://Wildchiken.github.io/harbor-diff/) and select **Try the demo**. The included capture pair is synthetic: a storefront serves a larger image, repeats an API request, and starts returning an HTTP error. No real browsing data is included.
+Open the [synthetic comparison](https://wildchiken.github.io/harbor-diff/#demo) directly, or select **Try the demo** in the app. The included capture pair is synthetic: a storefront serves a larger image, repeats an API request, and starts returning an HTTP error. No real browsing data is included.
+
+For a guided walkthrough, read [How to compare two HAR files](https://wildchiken.github.io/harbor-diff/compare-har-files.html). The [example captures](examples/) and [default Markdown report](examples/report.md) can be downloaded without an account.
 
 To compare your own captures:
 

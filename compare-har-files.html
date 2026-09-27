@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f6f1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>How to compare two HAR files — a worked example | HarborDiff</title>
+  <meta name="description" content="Compare before and after HAR files with a reproducible example. Inspect new HTTP errors, larger responses, repeated requests, and missing measurements; export a report locally.">
+  <link rel="canonical" href="https://wildchiken.github.io/harbor-diff/compare-har-files.html">
+  <meta property="og:title" content="How to compare two HAR files — a worked example">
+  <meta property="og:description" content="Follow a synthetic storefront example from network captures to an issue-ready report. No upload or account required.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://wildchiken.github.io/harbor-diff/compare-har-files.html">
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./guide.css">
+</head>
+<body>
+  <a class="skip-link" href="#guide">Skip to guide</a>
+  <header class="site-header shell">
+    <a class="brand" href="./" aria-label="HarborDiff home"><img src="./assets/logo.svg" width="32" height="32" alt=""><span>HarborDiff<span class="brand-dot">.</span></span></a>
+    <span class="header-label">Local HAR comparison</span>
+    <nav class="header-nav" aria-label="Project"><a href="./">App</a><a class="github-link" href="https://github.com/Wildchiken/harbor-diff">GitHub <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="guide" class="guide-shell">
+    <article>
+      <header class="guide-hero">
+        <p class="eyebrow">A REPRODUCIBLE WALKTHROUGH</p>
+        <h1>How to compare<br>two HAR files.</h1>
+        <p class="guide-lead">A new error, a much larger image, and three extra API calls. Here is how to find them, understand the limits of the evidence, and share a useful report.</p>
+        <div class="guide-actions"><a class="primary-button" href="./#demo">Open the synthetic comparison <span aria-hidden="true">→</span></a><span>No account. No upload. No setup.</span></div>
+        <p class="guide-meta">Uses the built-in HarborDiff demo. Every capture in this guide is synthetic.</p>
+      </header>
+      <img class="guide-overview" src="./assets/overview.svg" width="1200" height="660" alt="Synthetic example: cart status changes from 200 to 500, an image grows from 44,000 to 1,244,000 body bytes, and product calls increase from 1 to 4.">
+      <nav class="guide-contents" aria-label="In this guide"><strong>In this guide</strong><a href="#capture">1. Capture</a><a href="#inspect">2. Inspect</a><a href="#coverage">3. Check coverage</a><a href="#report">4. Share</a><a href="#matching">Matching limits</a></nav>
+
+      <section id="capture">
+        <p class="guide-step">01 / CAPTURE</p>
+        <h2>Record the same flow before and after.</h2>
+        <p>A HAR (HTTP Archive) is a JSON record of network requests and responses. It can include URLs, timing and size measurements, headers, and content. For a useful comparison, record a specific journey—for example, opening the storefront and adding one item to a cart—under comparable conditions.</p>
+        <ol>
+          <li>Open your browser's Network panel before starting the flow. Clear earlier requests so the capture has a deliberate scope.</li>
+          <li>Record the baseline and export it as HAR. Repeat the same actions after the change and export a second file.</li>
+          <li>Keep cache behavior, device, network throttling, and capture scope comparable. Use Chrome’s Preserve log or Firefox’s Persist Logs only when you need requests across navigations, and use it consistently.</li>
+          <li>Load the files into <strong>Before</strong> and <strong>After</strong>, then select <strong>Compare captures</strong>.</li>
+        </ol>
+        <p><strong>Chrome:</strong> clear text and resource-type filters before exporting the full flow, then use <strong>Export HAR (sanitized)</strong> in the Network toolbar. Filters can limit which requests are exported. <strong>Firefox:</strong> choose <strong>Save All as HAR</strong> from the Network Monitor toolbar menu or request list context menu.</p>
+        <aside class="guide-note"><strong>Just exploring?</strong> The <a href="./#demo">built-in demo</a> already has both captures. You can also download <a href="./examples/before.har" download>before.har</a> and <a href="./examples/after.har" download>after.har</a> to reproduce the comparison locally.</aside>
+        <p class="source-note">For browser-specific controls, see <a href="https://developer.chrome.com/docs/devtools/network/reference#save-as-har">Chrome's HAR export documentation</a> and <a href="https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/toolbar/index.html">Firefox's Network Monitor toolbar documentation</a>.</p>
+      </section>
+
+      <section id="inspect">
+        <p class="guide-step">02 / INSPECT</p>
+        <h2>Start with individual request groups.</h2>
+        <p>The demo contains 9 requests before and 12 after. HarborDiff groups repeated requests by HTTP method and normalized URL. Its first three finding cards highlight the cart, image, and search requests. Select <strong>More calls</strong> to inspect the products endpoint.</p>
+        <div class="guide-table" tabindex="0" role="region" aria-label="Synthetic example measurements, horizontally scrollable">
+          <table><caption>Exact values in the included synthetic captures</caption><thead><tr><th scope="col">Group</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">What to inspect</th></tr></thead><tbody>
+            <tr><th scope="row">Cart <code>R002</code></th><td>HTTP 200<br>140 ms</td><td>HTTP 500<br>820 ms</td><td>A new HTTP error and 680 ms longer duration. The error response is smaller, which does not make it a better result.</td></tr>
+            <tr><th scope="row">Image <code>R008</code></th><td>44,000 bytes</td><td>1,244,000 bytes</td><td>1,200,000 more response-body bytes. The app rounds this difference to 1.1 MiB. Check which image was served and its encoding.</td></tr>
+            <tr><th scope="row">Products <code>R003</code></th><td>1 call<br>8,500 bytes</td><td>4 calls<br>34,000 bytes</td><td>Each response is still 8,500 bytes. The extra recorded calls account for the larger group total.</td></tr>
+            <tr><th scope="row">Search <code>R005</code></th><td>180 ms<br>HTTP 200</td><td>1,260 ms<br>HTTP 200</td><td>A 1,080 ms increase despite successful status codes. Repeat the capture before inferring a persistent slowdown.</td></tr>
+          </tbody></table>
+        </div>
+        <p>Click a request to see its counts, known measurements, and observed status codes in both captures. A finding is a place to investigate; its position in the list is not proof that it caused a user's problem.</p>
+        <p><strong>Unflagged does not mean unchanged.</strong> The stylesheet becomes smaller and faster in this demo. The products group's median rises only 6.5 ms, below the default 100 ms threshold, even though its call count increases.</p>
+      </section>
+
+      <section id="coverage">
+        <p class="guide-step">03 / CHECK THE EVIDENCE</p>
+        <h2>Unknown measurements are not zeros.</h2>
+        <p>The after capture intentionally lacks a valid body size and duration for <code>/api/reviews</code>. Coverage is therefore <strong>11 of 12</strong> after responses, compared with <strong>9 of 9</strong> before.</p>
+        <aside class="guide-note"><strong>Why the total change says “unknown / incomplete”:</strong> the known byte total rises from 176,460 to 1,382,100 bytes, but the missing response could change the full total. HarborDiff shows the known totals and withholds a complete-capture delta.</aside>
+        <ul>
+          <li><strong>Body bytes</strong> use HAR <code>response.bodySize</code>. They exclude header overhead and are distinct from decoded content size.</li>
+          <li><strong>Duration</strong> uses HAR request time and the median within a group. It is not page-load time, interaction latency, or a Core Web Vital.</li>
+          <li><strong>HTTP errors</strong> cover statuses 400–599. Missing or zero statuses remain unknown; this version does not classify browser or network failures.</li>
+        </ul>
+        <p>Cache state, traffic, device load, and different actions can change what you record. One before/after pair shows observations, not statistical significance or root cause.</p>
+      </section>
+
+      <section id="report">
+        <p class="guide-step">04 / SHARE</p>
+        <h2>Put a small report in the issue.</h2>
+        <p>Select <strong>Copy summary</strong>, <strong>Markdown</strong>, or <strong>JSON</strong>. The report contains the full comparison; the table's current filter does not restrict the export.</p>
+        <p>Default reports use request IDs such as <code>R002</code>, omit URLs and input filenames, and exclude request headers, cookies, and payloads. These reports still contain measurements and status counts, so review the information you intend to share.</p>
+        <p>If you enable <strong>Include URL paths in exports</strong>, query values are redacted, but hostnames, paths, and query parameter names can still be sensitive. Chrome’s sanitized export removes certain sensitive information, including authentication and cookie headers, but it is not a promise to remove every sensitive URL or payload. Treat raw HAR files as private and inspect reports before sharing.</p>
+        <div class="guide-downloads"><a class="secondary-button" href="./examples/report.md" download>Download example Markdown ↓</a><a class="secondary-button" href="./examples/report.json" download>Download example JSON ↓</a></div>
+        <h3>Use the same comparison from the command line</h3>
+        <p>Node.js 20 or newer is required. There are no runtime dependencies.</p>
+        <pre><code>git clone https://github.com/Wildchiken/harbor-diff.git
+cd harbor-diff
+node bin/harbor-diff.js examples/before.har examples/after.har
+node bin/harbor-diff.js --demo --format json &gt; report.json</code></pre>
+        <p>For an explicit HTTP-error check, append <code>--fail-on errors</code>. Exit code 2 means the chosen flag occurred; it does not identify the cause.</p>
+      </section>
+
+      <section id="matching">
+        <h2>When two captures need more care</h2>
+        <dl class="guide-questions">
+          <dt>Cache-busting query values differ.</dt><dd>Values participate in matching. Ignore a specific parameter in <strong>Matching &amp; thresholds</strong> only if it is irrelevant to your comparison. Ignoring meaningful values can combine different requests.</dd>
+          <dt>JavaScript filenames contain different hashes.</dt><dd>Different filenames remain added and removed groups. HarborDiff does not infer that two hashed resources are versions of the same asset.</dd>
+          <dt>The same URL handles multiple API operations.</dt><dd>Requests with the same method and URL share a group even if their bodies differ. Payloads and GraphQL operations are not compared.</dd>
+          <dt>The capture is large.</dt><dd>The browser app accepts up to 25 MiB and 30,000 entries per capture. Record a smaller, comparable session instead of mixing unrelated browsing into the comparison.</dd>
+        </dl>
+      </section>
+      <section class="guide-finish" aria-labelledby="next-step"><h2 id="next-step">Try the comparison on a known example.</h2><p>Open the built-in demo, inspect the four groups above, and export a report. Then repeat the flow with your own captures.</p><div class="guide-actions"><a class="primary-button" href="./#demo">Open demo →</a><a href="https://github.com/Wildchiken/harbor-diff">View the source on GitHub ↗</a></div><p class="guide-meta">Found a confusing result? Share the expected behavior and a minimal synthetic example in an issue. If the tool is useful, a GitHub star helps others find it.</p></section>
+    </article>
+  </main>
+  <footer class="site-footer shell"><span>HarborDiff / Local comparison. Shareable findings.</span><a href="./">Back to the app ↗</a></footer>
+</body>
+</html>

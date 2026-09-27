@@ -2,7 +2,7 @@
 
 **网站改版后，网络请求到底变了什么？**
 
-[打开网页工具](https://Wildchiken.github.io/harbor-diff/) · [English](README.md)
+[直接体验示例](https://wildchiken.github.io/harbor-diff/#demo) · [对比案例（英文）](https://wildchiken.github.io/harbor-diff/compare-har-files.html) · [English](README.md)
 
 ![合成案例：新增 HTTP 错误、图片变大、API 重复调用](assets/overview.svg)
 
@@ -12,7 +12,7 @@
 
 ## 立即体验
 
-打开[网页工具](https://Wildchiken.github.io/harbor-diff/)，点击 **Try the demo**。示例是人工构造的商店页面抓包：一张图片变大、API 被重复调用，并出现新的 HTTP 错误。
+打开[合成数据对比](https://wildchiken.github.io/harbor-diff/#demo)，会直接加载示例；也可以在首页点击 **Try the demo**。示例是人工构造的商店页面抓包：一张图片变大、API 被重复调用，并出现新的 HTTP 错误。
 
 也可以在浏览器开发者工具的 Network 面板导出自己的 HAR 文件，分别放入 Before 和 After。尽量使用相同操作流程、设备、网络和缓存设置。
 
