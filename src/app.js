@@ -140,14 +140,15 @@ $('clear-button').addEventListener('click', () => {
   showFeedback('Captures cleared from this page.');
   $('before-file').focus();
 });
-$('demo-button').addEventListener('click', () => {
+function loadDemo() {
   const pair = createDemoCaptures();
   for (const side of ['before', 'after']) { revisions[side]++; storeCapture(side, pair[side], demoLabels[side], 'demo'); }
   $('ignore-params').value = '';
   $('min-bytes').value = '0';
   $('min-duration').value = '100';
   runComparison();
-});
+}
+$('demo-button').addEventListener('click', loadDemo);
 
 async function runComparison() {
   if (!captures.before || !captures.after || comparing) return;
@@ -349,3 +350,6 @@ $('copy-button').addEventListener('click', async () => {
     $('markdown-button').focus();
   }
 });
+
+// A shared demo link loads only the built-in synthetic pair. HAR data never enters the URL.
+if (location.hash === '#demo') loadDemo();
